@@ -1,18 +1,21 @@
 const express = require('express')
 const app = express()
 const connectDB = require('./config/database')
+
+//routes
 const homeRoutes = require('./routes/home')
 const todoRoutes = require('./routes/todos')
 
-require('dotenv').config({path: './config/.env'})
+require('dotenv').config({path: './config/.env'}) // allows me to use variables in .env files
 
-connectDB()
+connectDB() // calling that function
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
+app.use(express.urlencoded({ extended: true })) //body parser for the request
+app.use(express.json()) 
 
+//routes
 app.use('/', homeRoutes)
 app.use('/todos', todoRoutes)
  
